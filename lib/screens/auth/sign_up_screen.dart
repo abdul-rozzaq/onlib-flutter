@@ -16,111 +16,96 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          getBackgroundImage(),
-          getFadeColor(),
-          SafeArea(
+    return Stack(
+      children: [
+        getBackgroundImage(),
+        getFadeColor(),
+        Scaffold(
+          extendBody: true,
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            title: const Text(
+              'Hissob yaratish',
+            ),
+          ),
+          backgroundColor: Colors.transparent,
+          body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  InkWell(
-                    onTap: () => Navigator.pop(context),
-                    child: const Row(
-                      children: [
-                        Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
-                        SizedBox(width: 15),
-                        Text(
-                          'Hissob yaratish',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                  Blur(
+                    child: Container(
+                      padding: const EdgeInsets.only(left: 15, bottom: 15, right: 15, top: 5),
+                      // height: 190,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.white.withOpacity(.4)),
+                        color: Colors.white.withOpacity(.2),
+                      ),
+                      child: Column(
+                        children: [
+                          SimpleInput(
+                            controller: TextEditingController(),
+                            icon: Icons.person_outline,
+                            label: 'Ism Familiya',
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 5),
+                          SimpleInput(
+                            controller: TextEditingController(),
+                            icon: Icons.email_outlined,
+                            label: 'Email',
+                          ),
+                          const SizedBox(height: 5),
+                          SimpleInput(
+                            controller: TextEditingController(),
+                            icon: Icons.lock_outline,
+                            label: 'Parol',
+                            obscureText: true,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Blur(
-                          child: Container(
-                            padding: const EdgeInsets.only(left: 15, bottom: 15, right: 15, top: 5),
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: Colors.white.withOpacity(.4)),
-                              color: Colors.white.withOpacity(.2),
-                            ),
-                            child: Column(
-                              children: [
-                                SimpleInput(
-                                  controller: TextEditingController(),
-                                  icon: Icons.person_outline,
-                                  label: 'Ism Familiya',
-                                ),
-                                const SizedBox(height: 5),
-                                SimpleInput(
-                                  controller: TextEditingController(),
-                                  icon: Icons.email_outlined,
-                                  label: 'Email',
-                                ),
-                                const SizedBox(height: 5),
-                                SimpleInput(
-                                  controller: TextEditingController(),
-                                  icon: Icons.lock_outline,
-                                  label: 'Parol',
-                                  obscureText: true,
-                                ),
-                              ],
-                            ),
-                          ),
+                  const SizedBox(height: 10),
+                  const PrimaryButton(text: 'Ro\'yhatdan o\'tish'),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          thickness: 1.5,
+                          color: Colors.white.withOpacity(.5),
                         ),
-                        const SizedBox(height: 10),
-                        const PrimaryButton(text: 'Ro\'yhatdan o\'tish'),
-                        const SizedBox(height: 20),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Divider(
-                                thickness: 1.5,
-                                color: Colors.white.withOpacity(.5),
-                              ),
-                            ),
-                            const SizedBox(width: 15),
-                            Text(
-                              'yoki',
-                              style: TextStyle(color: Colors.white.withOpacity(.8)),
-                            ),
-                            const SizedBox(width: 15),
-                            Expanded(
-                              child: Divider(
-                                thickness: 1.5,
-                                color: Colors.white.withOpacity(.5),
-                              ),
-                            ),
-                          ],
+                      ),
+                      const SizedBox(width: 15),
+                      Text(
+                        'yoki',
+                        style: TextStyle(color: Colors.white.withOpacity(.8)),
+                      ),
+                      const SizedBox(width: 15),
+                      Expanded(
+                        child: Divider(
+                          thickness: 1.5,
+                          color: Colors.white.withOpacity(.5),
                         ),
-                        const SizedBox(height: 20),
-                        const SimpleOutlinedButton(text: 'Kirish'),
-                        const SizedBox(height: 50),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+                  const SizedBox(height: 20),
+                  const SimpleOutlinedButton(text: 'Kirish'),
+                  const SizedBox(height: 50),
                 ],
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -152,14 +137,12 @@ class SimpleInput extends StatefulWidget {
     required this.label,
     required this.controller,
     this.obscureText = false,
-    this.textInputType = TextInputType.text,
   });
 
   final IconData icon;
   final String label;
   final TextEditingController controller;
   final bool obscureText;
-  final TextInputType textInputType;
 
   @override
   State<SimpleInput> createState() => _SimpleInputState();
@@ -196,7 +179,6 @@ class _SimpleInputState extends State<SimpleInput> {
           const SizedBox(width: 10),
           Expanded(
             child: TextFormField(
-              keyboardType: widget.textInputType,
               obscureText: obscureText,
               controller: widget.controller,
               decoration: InputDecoration(
