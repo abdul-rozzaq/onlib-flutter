@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:onlib/components/bottom_navigation_bar.dart';
 import 'package:onlib/tabs/account_tab.dart';
 import 'package:onlib/tabs/categories_tab.dart';
@@ -18,6 +19,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.dark,
+    ));
     return Scaffold(
       extendBody: true,
       body: [

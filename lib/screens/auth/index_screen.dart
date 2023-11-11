@@ -74,7 +74,7 @@ class _IndexScreenState extends State<IndexScreen> {
     Size size = MediaQuery.of(context).size;
 
     return Image.asset(
-      'assets/images/background.jpg',
+      'assets/images/background.png',
       fit: BoxFit.cover,
       height: size.height,
       width: size.width,
